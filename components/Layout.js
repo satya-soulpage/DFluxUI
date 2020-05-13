@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types'
 import NextHead from 'next/head'
-import { AmpIncludeAmpInstallServiceworker } from './amp/AmpCustomElement'
+import Sidemenu from './sidemenu'
 
 // Your app's theme color
 const THEME_COLOR = '#005af0'
@@ -12,43 +11,28 @@ const THEME_COLOR = '#005af0'
  */
 const Layout = props => (
   <>
-    <NextHead>
-      <title>{props.title || ''}</title>
-      <meta name="description" content={props.description || ''} />
-      <meta name="theme-color" content={THEME_COLOR} />
-      <link rel="icon" sizes="192x192" href="/static/images/icons-192.png" />
-      <link rel="apple-touch-icon" href="/static/images/icons-192.png" />
-      <link rel="icon" href="/static/favicon.ico" />
-      <link rel="manifest" href="/manifest.json" />
-    </NextHead>
-
-    {props.children}
-
-    <AmpIncludeAmpInstallServiceworker />
-    <amp-install-serviceworker
-      src="/serviceworker.js"
-      data-iframe-src="/install-serviceworker.html"
-      layout="nodisplay"
-    />
-
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-2 sidemenu"><Sidemenu></Sidemenu></div>
+        <div class="col-md-10 main-body">{props.children}</div>
+      </div>
+    </div>
     <style jsx global>{`
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-          Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-          'Segoe UI Symbol';
-        min-height: 100vh;
-        scroll-behavior: smooth;
-        text-rendering: optimizeSpeed;
-        line-height: 1.5;
-      }
-    `}</style>
+   .sidemenu {
+     background-color:#FFFFFF;
+     width:55px;
+   }
+   .main-body {
+    margin-top: -14%;
+    margin-left: 9%;
+   }
+ `}</style>
   </>
 )
 
-Layout.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-}
+// Layout.propTypes = {
+//   title: PropTypes.string,
+//   description: PropTypes.string,
+// }
 
 export default Layout
